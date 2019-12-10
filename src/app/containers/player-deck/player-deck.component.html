@@ -5,6 +5,6 @@
   fxLayoutAlign.gt-xs="space-between center"
   class="deck-cantainer"
 >
-  <ui-card-pile [cards]="cards"></ui-card-pile>
+  <ui-card-pile [cards]="cards | async"></ui-card-pile>
   <ui-avatar name="You"></ui-avatar>
 </section>
