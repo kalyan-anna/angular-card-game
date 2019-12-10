@@ -10,4 +10,6 @@
   }
 </style>
 
-<div class="card">{{ card.id }}</div>
+<div class="card" style.right.px="{{ position * 5 }}" [style.zIndex]="position">
+  {{ card.id }}
+</div>
