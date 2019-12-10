@@ -75,7 +75,7 @@ const _snapReducer = createReducer(initialState,
     playedCard.status = 'faceup';
     centerCards.push(playedCard);
 
-    return {
+    const newState = {
       ...state,
       player: {
         cards: [...playerCards],
@@ -90,6 +90,11 @@ const _snapReducer = createReducer(initialState,
         cards: [...centerCards]
       }
     };
+
+    return {
+      ...newState,
+      winner: findWinner(newState)
+    };
   }),
 
   on(computerTurnCard, state => {
@@ -100,7 +105,7 @@ const _snapReducer = createReducer(initialState,
     playedCard.status = 'faceup';
     centerCards.push(playedCard);
 
-    return {
+    const newState = {
       ...state,
       player: {
         ...state.player,
@@ -114,6 +119,11 @@ const _snapReducer = createReducer(initialState,
         ...state.centerPile,
         cards: [...centerCards]
       }
+    } as SnapState;
+
+    return {
+      ...newState,
+      winner: findWinner(newState)
     };
   }),
 );
@@ -140,6 +150,16 @@ function shuffleAndDeal(cards: Card[]) {
 
 function selectRandomPlayer() {
   return Math.floor(Math.random() * 2) + 1;
+}
+
+function findWinner(state: SnapState) {
+  if (state.player.cards.length <= 0) {
+    return 'computer';
+  } else if (state.computer.cards.length <= 0) {
+    return 'player';
+  } else {
+    return null;
+  }
 }
 
 export function snapReducer(state, action) {
