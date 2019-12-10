@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
-import { tap, delay, mergeMap, take, filter, takeWhile } from 'rxjs/operators';
+import { tap, delay, mergeMap, take, filter, takeWhile, delayWhen } from 'rxjs/operators';
 import { computerTurnCard, computerCallSnap } from 'src/app/reducers/snap.actions';
 
 @Component({
@@ -16,6 +16,7 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
   turn$: Observable<boolean>;
   match$: Observable<boolean>;
   alive = true;
+  reactionTime: number;
 
   constructor(private store: Store<SnapState>) { }
 
@@ -24,10 +25,16 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
     this.turn$ = this.store.pipe(select(fromSnap.selectComputerTurn));
     this.match$ = this.store.pipe(select(fromSnap.selectMatch));
 
+    this.store.pipe(
+      takeWhile(() => this.alive),
+      select(fromSnap.selectReactionTime),
+      tap(time => this.reactionTime = time)
+    ).subscribe();
+
     this.turn$.pipe(
       takeWhile(() => this.alive),
       filter(turn => turn),
-      delay(500),
+      delayWhen(() => interval(this.reactionTime)),
       mergeMap(() => this.turn$.pipe(take(1))),
       filter(turn => turn),
       tap(() => {
@@ -38,7 +45,7 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
     this.match$.pipe(
       takeWhile(() => this.alive),
       filter(match => match),
-      delay(2000),
+      delayWhen(() => interval(this.reactionTime)),
       mergeMap(() => this.match$.pipe(take(1))),
       filter(match => match),
       tap(() => {

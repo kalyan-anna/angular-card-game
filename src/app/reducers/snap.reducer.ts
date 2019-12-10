@@ -47,6 +47,7 @@ const _snapReducer = createReducer(initialState,
     return {
       ...state,
       centerPile: {
+        ...state.centerPile,
         cards: [],
         matching: false
       },
@@ -65,7 +66,13 @@ const _snapReducer = createReducer(initialState,
     };
   }),
 
-  on(resetGame, () => ({ ...initialState })),
+  on(resetGame, state => ({
+    ...initialState,
+    computer: {
+      ...initialState.computer,
+      reactionTime: state.computer.reactionTime
+    }
+  })),
 
   on(playerTurnCard, state => {
     const playerCards = [...state.player.cards];
@@ -78,6 +85,7 @@ const _snapReducer = createReducer(initialState,
     const newState = {
       ...state,
       player: {
+        ...state.player,
         cards: playerCards,
         turn: false
       },
@@ -114,6 +122,7 @@ const _snapReducer = createReducer(initialState,
         turn: state.player.cards.length > 0 && computerCards.length > 0
       },
       computer: {
+        ...state.computer,
         cards: computerCards,
         turn: false
       },
@@ -146,10 +155,12 @@ const _snapReducer = createReducer(initialState,
     return {
       ...state,
       player: {
+        ...state.player,
         cards: playerCards,
         turn: true
       },
       centerPile: {
+        ...state.centerPile,
         cards: [],
         matching: false
       }
@@ -171,10 +182,12 @@ const _snapReducer = createReducer(initialState,
     return {
       ...state,
       computer: {
+        ...state.computer,
         cards: computerCards,
         turn: true
       },
       centerPile: {
+        ...state.centerPile,
         cards: [],
         matching: false
       }
