@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
 import { Observable, fromEvent, merge } from 'rxjs';
-import { mergeMap, tap, takeWhile, take } from 'rxjs/operators';
+import { mergeMap, tap, takeWhile, take, filter } from 'rxjs/operators';
 import { playerTurnCard } from 'src/app/reducers/snap.actions';
 
 @Component({
@@ -28,10 +28,9 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
       .pipe(
         takeWhile(() => this.alive),
         mergeMap(() => this.turn$.pipe(take(1))),
-        tap(turn => {
-          if (turn) {
-            this.store.dispatch(playerTurnCard());
-          }
+        filter(turn => turn),
+        tap(() => {
+          this.store.dispatch(playerTurnCard());
         })
       ).subscribe();
   }
