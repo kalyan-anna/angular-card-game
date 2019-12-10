@@ -17,6 +17,7 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
   match$: Observable<boolean>;
   alive = true;
   reactionTime: number;
+  message: string;
 
   constructor(private store: Store<SnapState>) { }
 
@@ -32,13 +33,11 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     combineLatest(this.turn$, this.match$).pipe(
-      tap(([turn, match]) => console.log('match:', match, ' turn:', turn)),
       takeWhile(() => this.alive),
       filter(([turn, match]) => turn || match),
       concatMap(value => of(value).pipe(delay(this.reactionTime))),
       switchMap(() => combineLatest(this.turn$, this.match$).pipe(take(1))),
       filter(([turn, match]) => turn || match),
-      tap(([turn, match]) => console.log('match2:', match, ' turn2:', turn)),
       tap(([turn, match]) => {
         if (match) {
           this.store.dispatch(computerCallSnap());
@@ -47,6 +46,21 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
         if (turn) {
           this.store.dispatch(computerTurnCard());
         }
+      })
+    ).subscribe();
+
+    combineLatest(this.turn$, this.store.pipe(select(fromSnap.selectWinner))).pipe(
+      takeWhile(() => this.alive),
+      tap(([turn, winner]) => {
+        if (winner === 'computer') {
+          this.message = 'WINNER';
+          return;
+        }
+        if (turn) {
+          this.message = 'Player';
+          return;
+        }
+        this.message = ' ';
       })
     ).subscribe();
   }

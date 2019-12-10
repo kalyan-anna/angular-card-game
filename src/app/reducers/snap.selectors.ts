@@ -43,6 +43,11 @@ const selectReactionTime = createSelector(
   (state: SnapState) => state.computer.reactionTime
 );
 
+const selectWinner = createSelector(
+  selectSnapState,
+  (state: SnapState) => state.winner
+);
+
 export const fromSnap = {
   selectPlayerPile,
   selectComputerPile,
@@ -51,5 +56,6 @@ export const fromSnap = {
   selectPlayerTurn,
   selectComputerTurn,
   selectMatch,
-  selectReactionTime
+  selectReactionTime,
+  selectWinner
 };

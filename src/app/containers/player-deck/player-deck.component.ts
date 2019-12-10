@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable, fromEvent, combineLatest } from 'rxjs';
 import { mergeMap, tap, takeWhile, take, filter } from 'rxjs/operators';
 import { playerTurnCard } from 'src/app/reducers/snap.actions';
 
@@ -15,6 +15,7 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
   cards$: Observable<Card[]>;
   turn$: Observable<boolean>;
   alive = true;
+  message: string;
 
   @ViewChild('cardPile', { static: true, read: ElementRef })
   cardPileEl: ElementRef<HTMLElement>;
@@ -24,6 +25,21 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cards$ = this.store.pipe(select(fromSnap.selectPlayerPile));
     this.turn$ = this.store.pipe(select(fromSnap.selectPlayerTurn));
+
+    combineLatest(this.turn$, this.store.pipe(select(fromSnap.selectWinner))).pipe(
+      takeWhile(() => this.alive),
+      tap(([turn, winner]) => {
+        if (winner === 'player') {
+          this.message = 'WINNER';
+          return;
+        }
+        if (turn) {
+          this.message = 'Player';
+          return;
+        }
+        this.message = ' ';
+      })
+    ).subscribe();
 
     fromEvent(this.cardPileEl.nativeElement, 'click')
       .pipe(
@@ -39,4 +55,5 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.alive = false;
   }
+
 }

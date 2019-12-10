@@ -7,14 +7,15 @@ import { AvatarComponent } from './avatar/avatar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
-  declarations: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent],
+  declarations: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent, MessageComponent],
   imports: [
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule
   ],
-  exports: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent]
+  exports: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent, MessageComponent]
 })
 export class UiModule { }

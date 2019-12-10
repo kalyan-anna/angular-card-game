@@ -6,3 +6,11 @@
     margin-top: 0;
   }
 }
+
+ui-message {
+  z-index: 1000;
+  margin: 0 10px 0 -105px;
+  @include layout-bp(gt-xs) {
+    margin: 0 0 -75px 0;
+  }
+}

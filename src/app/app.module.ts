@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromSnap from './reducers/snap.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     MatSliderModule,
     MatButtonModule,
+    MatCardModule,
     StoreModule.forRoot({ snap: fromSnap.snapReducer }, {
       runtimeChecks: {
         strictStateImmutability: true,
