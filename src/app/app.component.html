@@ -1,1 +1,22 @@
-<ui-header></ui-header>
+<style>
+  article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+  }
+
+  main {
+    flex-grow: 2;
+    flex-basis: 100px;
+    width: 100%;
+  }
+</style>
+
+<article>
+  <ui-header></ui-header>
+  <main>
+    <snap-game></snap-game>
+  </main>
+</article>

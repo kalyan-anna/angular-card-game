@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'snap-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'angular-snap-game';
 }

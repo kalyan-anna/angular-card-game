@@ -4,5 +4,6 @@
   "prettier.jsxSingleQuote": true,
   "prettier.quoteProps": "consistent",
   "editor.formatOnSave": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "prettier.proseWrap": "always"
 }
