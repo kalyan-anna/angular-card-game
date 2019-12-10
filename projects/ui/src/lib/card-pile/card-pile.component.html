@@ -1,7 +1,8 @@
 <div class="card-pile-container">
   <ui-card
-    *ngFor="let card of cards; trackBy: identify; let i = index"
+    *ngFor="let card of cards; trackBy: identify; index as i; last as isLast"
     [card]="card"
     [position]="i"
+    [ngClass]="{ 'top-card': isTopCard(isLast, card) }"
   ></ui-card>
 </div>
