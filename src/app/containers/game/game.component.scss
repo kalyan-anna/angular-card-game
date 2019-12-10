@@ -1,0 +1,11 @@
+@import '~@angular/flex-layout/mq';
+
+mat-slider {
+  width: 300px;
+}
+button {
+  width: 100px;
+  @include layout-bp(gt-xs) {
+    width: 150px;
+  }
+}

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'snap-game',
-  templateUrl: './game.component.html'
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
   cards: Card[];
