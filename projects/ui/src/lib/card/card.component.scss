@@ -1,3 +1,5 @@
+@import '~@angular/flex-layout/mq';
+
 .card {
   display: inline-block;
   width: 100px;
@@ -7,7 +9,7 @@
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   position: absolute;
 
-  @media (min-width: 600px) {
+  @include layout-bp(gt-xs) {
     width: 150px;
     height: 250px;
   }

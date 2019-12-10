@@ -1,10 +1,18 @@
+<style>
+  mat-slider {
+    width: 300px;
+  }
+</style>
+
 <div
-  fxLayout="row"
-  fxLayoutAlign="space-evenly center"
-  fxLayout.lt-sm="column"
-  fxLayoutAlign.lt-sm="space-around center"
+  fxLayout="column"
+  fxLayoutAlign="space-around center"
+  fxLayout.gt-xs="row"
+  fxLayoutAlign.gt-xs="space-evenly center"
 >
   <ui-card-pile [cards]="cards"></ui-card-pile>
   <ui-card-pile [cards]="cards"></ui-card-pile>
   <ui-card-pile></ui-card-pile>
 </div>
+
+<mat-slider min="1" max="100" step="1" value="1" color="primary"></mat-slider>

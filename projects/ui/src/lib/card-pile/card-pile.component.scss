@@ -1,3 +1,5 @@
+@import '~@angular/flex-layout/mq';
+
 .card-pile-container {
   display: inline-block;
   position: relative;
@@ -6,7 +8,7 @@
   min-height: 150px;
   box-shadow: inset 0 0 10px #000000;
 
-  @media (min-width: 600px) {
+  @include layout-bp(gt-xs) {
     width: 150px;
     height: 250px;
   }
