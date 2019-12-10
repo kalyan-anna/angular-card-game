@@ -1,9 +1,13 @@
 <style>
   .card-pile {
     display: inline-block;
+    position: relative;
   }
 </style>
 
 <div class="card-pile">
-  <ui-card></ui-card>
+  <ui-card
+    *ngFor="let card of cards; trackBy: identify"
+    [card]="card"
+  ></ui-card>
 </div>
