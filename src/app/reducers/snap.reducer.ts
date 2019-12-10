@@ -42,6 +42,8 @@ export const initialState: SnapState = {
 const _snapReducer = createReducer(initialState,
   on(startGame, state => {
     const shuffledCards = shuffleAndDeal([...allCards]);
+    const playerTurn = selectRandomPlayer();
+
     return {
       ...state,
       centerPile: {
@@ -50,11 +52,13 @@ const _snapReducer = createReducer(initialState,
       },
       player: {
         ...state.player,
-        cards: shuffledCards.playerPile
+        cards: shuffledCards.playerPile,
+        turn: playerTurn === 1
       },
       computer: {
         ...state.computer,
-        cards: shuffledCards.computerPile
+        cards: shuffledCards.computerPile,
+        turn: playerTurn === 2
       },
       isPlaying: true,
       winner: null
@@ -82,6 +86,10 @@ function shuffleAndDeal(cards: Card[]) {
     playerPile,
     computerPile
   };
+}
+
+function selectRandomPlayer() {
+  return Math.floor(Math.random() * 2) + 1;
 }
 
 export function snapReducer(state, action) {
