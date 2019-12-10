@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { UiModule } from 'projects/ui/src/public-api';
 import { GameComponent } from './containers/game/game.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlayerDeckComponent } from './containers/player-deck/player-deck.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GameComponent
+    GameComponent,
+    PlayerDeckComponent
   ],
   imports: [
     BrowserModule,
