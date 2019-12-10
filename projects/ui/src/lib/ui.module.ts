@@ -6,13 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AvatarComponent } from './avatar/avatar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent],
   imports: [
     BrowserModule,
     FlexLayoutModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   exports: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent]
 })

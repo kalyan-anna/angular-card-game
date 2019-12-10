@@ -13,4 +13,12 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getColor() {
+    if (this.card.shape === 'd' || this.card.shape === 'h') {
+      return '#A3181B';
+    } else {
+      return 'black';
+    }
+  }
 }

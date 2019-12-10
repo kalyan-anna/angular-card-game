@@ -12,21 +12,19 @@ export class CenterDeckComponent implements OnInit {
 
   ngOnInit() {
     this.cards = [
-      { id: 'a1', shape: 'a', number: 1 },
-      { id: 'a2', shape: 'a', number: 2 },
-      { id: 'a3', shape: 'a', number: 3 },
-      { id: 'a4', shape: 'a', number: 3 },
-      { id: 'a5', shape: 'a', number: 3 },
-      { id: 'a6', shape: 'a', number: 3 },
-      { id: 'a7', shape: 'a', number: 3 },
-      { id: 'a8', shape: 'a', number: 3 },
-      { id: 'a9', shape: 'a', number: 3 },
-      { id: 'a10', shape: 'a', number: 3 },
-      { id: 'a11', shape: 'a', number: 3 },
-      { id: 'a12', shape: 'a', number: 3 },
-      { id: 'a13', shape: 'a', number: 3 },
-      { id: 'a14', shape: 'a', number: 3 },
-      { id: 'a15', shape: 'a', number: 3 }
+      { id: 's1', shape: 's', number: 'A', status: 'faceup' },
+      { id: 's2', shape: 's', number: '2', status: 'faceup' },
+      { id: 's3', shape: 's', number: '3', status: 'faceup' },
+      { id: 's4', shape: 's', number: '4', status: 'faceup' },
+      { id: 's5', shape: 's', number: '5', status: 'faceup' },
+      { id: 's6', shape: 's', number: '6', status: 'faceup' },
+      { id: 's7', shape: 's', number: '7', status: 'faceup' },
+      { id: 's8', shape: 's', number: '8', status: 'faceup' },
+      { id: 's9', shape: 's', number: '9', status: 'faceup' },
+      { id: 's10', shape: 's', number: '10', status: 'faceup' },
+      { id: 's11', shape: 's', number: 'J', status: 'faceup' },
+      { id: 's12', shape: 's', number: 'Q', status: 'faceup' },
+      { id: 's13', shape: 's', number: 'K', status: 'faceup' },
     ];
   }
 
