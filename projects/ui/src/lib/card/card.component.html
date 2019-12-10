@@ -1,10 +1,4 @@
-<div
-  class="card"
-  style.right.px="{{ position }}"
-  [style.zIndex]="position"
-  [style.color]="getColor()"
-  [style.backgroundColor]="getBackgroundColor()"
->
+<div class="card" style.right.px="{{ position }}" [style.zIndex]="position">
   <!-- faceup -->
   <div
     class="card__faceup"
@@ -21,13 +15,15 @@
 
     <div></div>
 
-    <div fxLayout="column" fxLayoutAlign="space-between start">
+    <div fxLayout="column" fxLayoutAlign="start center">
       <span>{{ card.number }}</span>
       <ng-container
         *ngTemplateOutlet="shapeTemplate; context: { shape: this.card.shape }"
       ></ng-container>
     </div>
   </div>
+
+  <div *ngIf="!isFaceup" class="card__facedown"></div>
 </div>
 
 <ng-template #shapeTemplate let-shape="shape">

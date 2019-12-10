@@ -22,13 +22,6 @@ export class CardComponent implements OnInit {
     }
   }
 
-  getBackgroundColor() {
-    if (this.isFaceup) {
-      return 'white';
-    }
-    return '#A3181B';
-  }
-
   get isFaceup() {
     return this.card.status === 'faceup';
   }

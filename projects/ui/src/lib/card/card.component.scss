@@ -4,11 +4,6 @@
   display: inline-block;
   width: 100px;
   height: 150px;
-  background-color: white;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 1px 3px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 25px;
-  padding: 15px;
   font-weight: 700;
   font-size: 1.2rem;
 
@@ -25,14 +20,24 @@
 
 .card__faceup {
   height: 100%;
-  position: relative;
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 25px;
 
   div:last-child {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    height: 100%;
     transform: rotate(-180deg);
   }
+}
+
+.card__facedown {
+  background-color: #a3181b;
+  height: 100%;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 25px;
 }
 
 .card__shape {

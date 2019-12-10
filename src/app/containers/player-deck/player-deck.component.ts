@@ -25,7 +25,7 @@ export class PlayerDeckComponent implements OnInit {
       { id: 's11', shape: 's', number: 'J', status: 'facedown' },
       { id: 's12', shape: 's', number: 'Q', status: 'facedown' },
       { id: 's13', shape: 's', number: 'K', status: 'facedown' },
-      { id: 'd1', shape: 'd', number: 'A', status: 'facedown' },
+      { id: 'd1', shape: 'd', number: 'A', status: 'faceup' },
     ];
   }
 
