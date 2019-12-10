@@ -17,5 +17,9 @@
 
 .top-card {
   position: absolute;
-  right: -44px;
+  right: -34px;
+  @include layout-bp(gt-xs) {
+    right: -44px;
+    top: 20px;
+  }
 }
