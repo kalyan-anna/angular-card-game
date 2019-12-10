@@ -10,12 +10,12 @@ import { fromSnap } from 'src/app/reducers/snap.selectors';
   styleUrls: ['./center-deck.component.scss']
 })
 export class CenterDeckComponent implements OnInit {
-  cards: Observable<Card[]>;
+  cards$: Observable<Card[]>;
 
   constructor(private store: Store<SnapState>) { }
 
   ngOnInit() {
-    this.cards = this.store.pipe(select(fromSnap.selectCenterPile));
+    this.cards$ = this.store.pipe(select(fromSnap.selectCenterPile));
   }
 
 }

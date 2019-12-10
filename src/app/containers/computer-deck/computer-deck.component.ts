@@ -10,12 +10,13 @@ import { fromSnap } from 'src/app/reducers/snap.selectors';
   styleUrls: ['./computer-deck.component.scss']
 })
 export class ComputerDeckComponent implements OnInit {
-  cards: Observable<Card[]>;
+  cards$: Observable<Card[]>;
+  turn$: Observable<boolean>;
 
   constructor(private store: Store<SnapState>) { }
 
   ngOnInit() {
-    this.cards = this.store.pipe(select(fromSnap.selectComputerPile));
+    this.cards$ = this.store.pipe(select(fromSnap.selectComputerPile));
   }
 
 }

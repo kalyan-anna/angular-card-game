@@ -4,6 +4,7 @@ import { SnapState } from 'src/app/reducers/snap.reducer';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { mergeMap, tap, takeWhile, take } from 'rxjs/operators';
+import { playerTurnCard } from 'src/app/reducers/snap.actions';
 
 @Component({
   selector: 'snap-player-deck',
@@ -29,7 +30,7 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
         mergeMap(() => this.turn$.pipe(take(1))),
         tap(turn => {
           if (turn) {
-            console.log('turn card......');
+            this.store.dispatch(playerTurnCard());
           }
         })
       ).subscribe();

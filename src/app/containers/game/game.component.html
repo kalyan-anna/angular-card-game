@@ -18,7 +18,7 @@
     mat-raised-button
     color="primary"
     (click)="onStartGame()"
-    *ngIf="!(isPlaying | async)"
+    *ngIf="!(isPlaying$ | async)"
   >
     Start
   </button>
@@ -27,7 +27,7 @@
     mat-raised-button
     color="primary"
     (click)="onRestartGame()"
-    *ngIf="isPlaying | async"
+    *ngIf="isPlaying$ | async"
   >
     Restart
   </button>

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { startGame, resetGame } from './snap.actions';
+import { startGame, resetGame, playerTurnCard } from './snap.actions';
 import { allCards } from '../models/all-cards';
 
 export interface SnapState {
@@ -66,6 +66,31 @@ const _snapReducer = createReducer(initialState,
   }),
 
   on(resetGame, () => ({ ...initialState })),
+
+  on(playerTurnCard, state => {
+    const playerCards = [...state.player.cards];
+    const playedCard: Card = { ...playerCards.pop() };
+
+    const centerCards = [...state.centerPile.cards];
+    playedCard.status = 'faceup';
+    centerCards.push(playedCard);
+
+    return {
+      ...state,
+      player: {
+        cards: [...playerCards],
+        turn: false
+      },
+      computer: {
+        ...state.computer,
+        turn: true
+      },
+      centerPile: {
+        ...state.centerPile,
+        cards: [...centerCards]
+      }
+    };
+  })
 );
 
 function shuffleAndDeal(cards: Card[]) {

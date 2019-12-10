@@ -11,12 +11,12 @@ import { fromSnap } from 'src/app/reducers/snap.selectors';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  isPlaying: Observable<boolean>;
+  isPlaying$: Observable<boolean>;
 
   constructor(private store: Store<SnapState>) { }
 
   ngOnInit() {
-    this.isPlaying = this.store.pipe(select(fromSnap.selectPlaying));
+    this.isPlaying$ = this.store.pipe(select(fromSnap.selectPlaying));
   }
 
   onStartGame() {
