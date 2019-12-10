@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { UiComponent } from './ui.component';
-
+import { HeaderComponent } from './header/header/header.component';
 
 
 @NgModule({
-  declarations: [UiComponent],
+  declarations: [HeaderComponent],
   imports: [
   ],
-  exports: [UiComponent]
+  exports: [HeaderComponent]
 })
 export class UiModule { }
