@@ -3,8 +3,16 @@
 .control-container {
   margin-top: 20px;
 
+  @include layout-bp(gt-xs) {
+    margin-top: 50px;
+  }
+
   mat-slider {
     width: 300px;
+    margin-top: 0;
+    @include layout-bp(gt-xs) {
+      margin-top: 20px;
+    }
   }
 
   button {

@@ -10,13 +10,15 @@ import { GameComponent } from './containers/game/game.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerDeckComponent } from './containers/player-deck/player-deck.component';
 import { ComputerDeckComponent } from './containers/computer-deck/computer-deck.component';
+import { CenterDeckComponent } from './containers/center-deck/center-deck.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
     PlayerDeckComponent,
-    ComputerDeckComponent
+    ComputerDeckComponent,
+    CenterDeckComponent
   ],
   imports: [
     BrowserModule,

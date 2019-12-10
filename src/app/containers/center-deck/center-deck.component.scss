@@ -1,0 +1,8 @@
+@import '~@angular/flex-layout/mq';
+
+.deck-container {
+  margin-top: 10px;
+  @include layout-bp(gt-xs) {
+    margin-top: 0;
+  }
+}
