@@ -1,3 +1,17 @@
 <div class="card" style.right.px="{{ position }}" [style.zIndex]="position">
-  {{ card.id }}
+  <div class="card__faceup" fxLayout="row" fxLayoutAlign="space-between start">
+    <div fxLayout="column" fxLayoutAlign="space-between start">
+      <span>{{ card.number }}</span>
+      <ng-container *ngTemplateOutlet="shape"></ng-container>
+    </div>
+    <div></div>
+    <div fxLayout="column" fxLayoutAlign="space-between start">
+      <span>{{ card.number }}</span>
+      <ng-container *ngTemplateOutlet="shape"></ng-container>
+    </div>
+  </div>
 </div>
+
+<ng-template #shape>
+  <span>{{ card.shape }}</span>
+</ng-template>

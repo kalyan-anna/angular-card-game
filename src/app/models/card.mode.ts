@@ -1,5 +1,8 @@
+type CardStatus = 'faceup' | 'facedown';
+
 interface Card {
   id: string;
   shape: string;
-  number: number;
+  number: string;
+  status: CardStatus;
 }

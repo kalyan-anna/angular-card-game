@@ -9,9 +9,25 @@
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   position: absolute;
   border-radius: 25px;
+  padding: 15px;
+  font-weight: 700;
+  font-size: 1.2rem;
 
   @include layout-bp(gt-xs) {
     width: 150px;
     height: 250px;
+    font-size: 1.5rem;
+  }
+}
+
+.card__faceup {
+  height: 100%;
+  position: relative;
+
+  div:last-child {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: rotate(-180deg);
   }
 }

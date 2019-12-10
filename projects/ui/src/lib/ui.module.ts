@@ -4,11 +4,15 @@ import { CardComponent } from './card/card.component';
 import { CardPileComponent } from './card-pile/card-pile.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AvatarComponent } from './avatar/avatar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule,
   ],
   exports: [HeaderComponent, CardComponent, CardPileComponent, AvatarComponent]
 })
