@@ -25,7 +25,7 @@ export const initialState: SnapState = {
   player: {
     cards: [],
     turn: false,
-    snapped: true
+    snapped: false
   },
   computer: {
     cards: [],
