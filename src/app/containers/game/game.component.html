@@ -1,4 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<div
+  fxLayout="row"
+  fxLayoutAlign="space-evenly center"
+  fxLayoutAlign.lt-sm="space-around center"
+>
   <ui-card-pile [cards]="cards"></ui-card-pile>
   <ui-card-pile [cards]="cards"></ui-card-pile>
   <ui-card-pile [cards]="cards"></ui-card-pile>
