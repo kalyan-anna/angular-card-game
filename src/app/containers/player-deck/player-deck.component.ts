@@ -26,11 +26,19 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
     this.cards$ = this.store.pipe(select(fromSnap.selectPlayerPile));
     this.turn$ = this.store.pipe(select(fromSnap.selectPlayerTurn));
 
-    combineLatest(this.turn$, this.store.pipe(select(fromSnap.selectWinner))).pipe(
+    combineLatest(
+      this.turn$,
+      this.store.pipe(select(fromSnap.selectWinner)),
+      this.store.pipe(select(fromSnap.selectPlayerSnapped)),
+    ).pipe(
       takeWhile(() => this.alive),
-      tap(([turn, winner]) => {
+      tap(([turn, winner, snapped]) => {
         if (winner === 'player') {
           this.message = 'WINNER';
+          return;
+        }
+        if (snapped) {
+          this.message = 'SNAaap...';
           return;
         }
         if (turn) {

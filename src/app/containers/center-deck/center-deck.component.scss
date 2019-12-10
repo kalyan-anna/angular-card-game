@@ -3,6 +3,6 @@
 .deck-container {
   margin-top: 10px;
   @include layout-bp(gt-xs) {
-    margin-top: 0;
+    margin-top: -48px;
   }
 }

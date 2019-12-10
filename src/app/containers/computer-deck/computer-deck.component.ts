@@ -41,6 +41,7 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
       tap(([turn, match]) => {
         if (match) {
           this.store.dispatch(computerCallSnap());
+          this.message = 'SNAaap...';
           return;
         }
         if (turn) {

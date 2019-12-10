@@ -6,6 +6,7 @@ export interface SnapState {
   player: {
     cards: Card[];
     turn: boolean;
+    snapped: boolean;
   };
   computer: {
     cards: Card[];
@@ -23,7 +24,8 @@ export interface SnapState {
 export const initialState: SnapState = {
   player: {
     cards: [],
-    turn: false
+    turn: false,
+    snapped: true
   },
   computer: {
     cards: [],
@@ -54,6 +56,7 @@ const _snapReducer = createReducer(initialState,
       player: {
         ...state.player,
         cards: shuffledCards.playerPile,
+        snapped: false,
         turn: playerTurn === 1
       },
       computer: {
@@ -87,7 +90,8 @@ const _snapReducer = createReducer(initialState,
       player: {
         ...state.player,
         cards: playerCards,
-        turn: false
+        turn: false,
+        snapped: false
       },
       computer: {
         ...state.computer,
@@ -119,7 +123,8 @@ const _snapReducer = createReducer(initialState,
       ...state,
       player: {
         ...state.player,
-        turn: state.player.cards.length > 0 && computerCards.length > 0
+        turn: state.player.cards.length > 0 && computerCards.length > 0,
+        snapped: false
       },
       computer: {
         ...state.computer,
@@ -157,7 +162,8 @@ const _snapReducer = createReducer(initialState,
       player: {
         ...state.player,
         cards: playerCards,
-        turn: true
+        turn: true,
+        snapped: true
       },
       computer: {
         ...state.computer,
@@ -192,7 +198,8 @@ const _snapReducer = createReducer(initialState,
       },
       player: {
         ...state.player,
-        turn: false
+        turn: false,
+        snapped: false
       },
       centerPile: {
         ...state.centerPile,
