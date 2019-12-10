@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { Store, select } from '@ngrx/store';
-import { startGame, resetGame } from 'src/app/reducers/snap.actions';
+import { startGame, resetGame, setReactionTime } from 'src/app/reducers/snap.actions';
 import { Observable } from 'rxjs';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
 
@@ -26,5 +26,9 @@ export class GameComponent implements OnInit {
   onRestartGame() {
     this.store.dispatch(resetGame());
     this.store.dispatch(startGame());
+  }
+
+  onReactionTime(event) {
+    this.store.dispatch(setReactionTime({ reactionTime: event.value }));
   }
 }

@@ -38,6 +38,11 @@ const selectMatch = createSelector(
   (state: SnapState) => state.centerPile.matching && state.isPlaying
 );
 
+const selectReactionTime = createSelector(
+  selectSnapState,
+  (state: SnapState) => state.computer.reactionTime
+);
+
 export const fromSnap = {
   selectPlayerPile,
   selectComputerPile,
@@ -45,5 +50,6 @@ export const fromSnap = {
   selectPlaying,
   selectPlayerTurn,
   selectComputerTurn,
-  selectMatch
+  selectMatch,
+  selectReactionTime
 };

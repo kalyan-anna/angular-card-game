@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { startGame, resetGame, playerTurnCard, computerTurnCard, playerCallSnap, computerCallSnap } from './snap.actions';
+import { startGame, resetGame, playerTurnCard, computerTurnCard, playerCallSnap, computerCallSnap, setReactionTime } from './snap.actions';
 import { allCards } from '../models/all-cards';
 
 export interface SnapState {
@@ -28,7 +28,7 @@ export const initialState: SnapState = {
   computer: {
     cards: [],
     turn: false,
-    reactionTime: 2000
+    reactionTime: 1000
   },
   centerPile: {
     cards: [...allCards],
@@ -179,7 +179,17 @@ const _snapReducer = createReducer(initialState,
         matching: false
       }
     } as SnapState;
-  })
+  }),
+
+  on(setReactionTime, (state, { reactionTime }) => {
+    return {
+      ...state,
+      computer: {
+        ...state.computer,
+        reactionTime
+      }
+    };
+  }),
 );
 
 function shuffleAndDeal(cards: Card[]) {
