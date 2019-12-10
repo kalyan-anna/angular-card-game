@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SnapState } from 'src/app/reducers/snap.reducer';
+import { Store } from '@ngrx/store';
+import { startGame } from 'src/app/reducers/snap.actions';
 
 @Component({
   selector: 'snap-game',
@@ -6,28 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  cards: Card[];
-
-  constructor() { }
+  constructor(private store: Store<SnapState>) { }
 
   ngOnInit() {
-    this.cards = [
-      { id: 'a1', shape: 'a', number: 1 },
-      { id: 'a2', shape: 'a', number: 2 },
-      { id: 'a3', shape: 'a', number: 3 },
-      { id: 'a4', shape: 'a', number: 3 },
-      { id: 'a5', shape: 'a', number: 3 },
-      { id: 'a6', shape: 'a', number: 3 },
-      { id: 'a7', shape: 'a', number: 3 },
-      { id: 'a8', shape: 'a', number: 3 },
-      { id: 'a9', shape: 'a', number: 3 },
-      { id: 'a10', shape: 'a', number: 3 },
-      { id: 'a11', shape: 'a', number: 3 },
-      { id: 'a12', shape: 'a', number: 3 },
-      { id: 'a13', shape: 'a', number: 3 },
-      { id: 'a14', shape: 'a', number: 3 },
-      { id: 'a15', shape: 'a', number: 3 }
-    ];
   }
 
+  onStartGame() {
+    this.store.dispatch(startGame());
+  }
 }

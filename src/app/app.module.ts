@@ -11,6 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerDeckComponent } from './containers/player-deck/player-deck.component';
 import { ComputerDeckComponent } from './containers/computer-deck/computer-deck.component';
 import { CenterDeckComponent } from './containers/center-deck/center-deck.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromSnap from './reducers/snap.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,17 @@ import { CenterDeckComponent } from './containers/center-deck/center-deck.compon
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatButtonModule
+    MatButtonModule,
+    StoreModule.forRoot({ snap: fromSnap.snapReducer }, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
