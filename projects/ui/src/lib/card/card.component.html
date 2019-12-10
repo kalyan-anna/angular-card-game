@@ -3,8 +3,15 @@
   style.right.px="{{ position }}"
   [style.zIndex]="position"
   [style.color]="getColor()"
+  [style.backgroundColor]="getBackgroundColor()"
 >
-  <div class="card__faceup" fxLayout="row" fxLayoutAlign="space-between start">
+  <!-- faceup -->
+  <div
+    class="card__faceup"
+    fxLayout="row"
+    fxLayoutAlign="space-between start"
+    *ngIf="isFaceup"
+  >
     <div fxLayout="column" fxLayoutAlign="space-between start">
       <span>{{ card.number }}</span>
       <ng-container

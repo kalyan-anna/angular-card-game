@@ -21,4 +21,15 @@ export class CardComponent implements OnInit {
       return 'black';
     }
   }
+
+  getBackgroundColor() {
+    if (this.isFaceup) {
+      return 'white';
+    }
+    return '#A3181B';
+  }
+
+  get isFaceup() {
+    return this.card.status === 'faceup';
+  }
 }
