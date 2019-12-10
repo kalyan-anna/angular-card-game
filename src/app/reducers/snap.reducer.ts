@@ -93,7 +93,8 @@ const _snapReducer = createReducer(initialState,
 
     return {
       ...newState,
-      winner: findWinner(newState)
+      winner: findWinner(newState),
+      isPlaying: !findWinner(newState)
     };
   }),
 
@@ -123,7 +124,8 @@ const _snapReducer = createReducer(initialState,
 
     return {
       ...newState,
-      winner: findWinner(newState)
+      winner: findWinner(newState),
+      isPlaying: !findWinner(newState)
     };
   }),
 );

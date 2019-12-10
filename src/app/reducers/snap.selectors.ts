@@ -25,12 +25,12 @@ const selectPlaying = createSelector(
 
 const selectPlayerTurn = createSelector(
   selectSnapState,
-  (state: SnapState) => state.player.turn
+  (state: SnapState) => state.player.turn && state.isPlaying
 );
 
 const selectComputerTurn = createSelector(
   selectSnapState,
-  (state: SnapState) => state.computer.turn
+  (state: SnapState) => state.computer.turn && state.isPlaying
 );
 
 export const fromSnap = {
