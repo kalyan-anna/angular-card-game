@@ -4,14 +4,15 @@
 $accent: mat-color(map-get($custom-theme, accent));
 
 .avatar-container {
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 50%;
   border: 4px solid rgba(200, 200, 200, 0.4);
   text-align: center;
   line-height: 50px;
   background-color: $accent;
   color: white;
+  padding: 5px;
 
   span {
     display: inline-block;
@@ -19,9 +20,9 @@ $accent: mat-color(map-get($custom-theme, accent));
     line-height: normal;
   }
 
-  margin: 0 25px 0 -80px;
+  margin: 0 -80px 0 25px;
 
   @include layout-bp(gt-xs) {
-    margin: -70px 0 10px 0;
+    margin: -80px 0 10px 0;
   }
 }
