@@ -41,7 +41,7 @@ export const initialState: SnapState = {
 // tslint:disable-next-line:variable-name
 const _snapReducer = createReducer(initialState,
   on(startGame, state => {
-    const shuffledCards = shuffleAndDeal(state.centerPile.cards);
+    const shuffledCards = shuffleAndDeal([...allCards]);
     return {
       ...state,
       centerPile: {
@@ -69,8 +69,8 @@ function shuffleAndDeal(cards: Card[]) {
   const computerPile = [];
 
   // tslint:disable-next-line:prefer-for-of
-  for (let i = allCards.length - 1; i > 0; i--) {
-    const card = allCards.splice(Math.floor(Math.random() * allCards.length), 1)[0];
+  for (let i = cards.length - 1; i > 0; i--) {
+    const card = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
     if (i % 2 === 0) {
       playerPile.push(card);
     } else {

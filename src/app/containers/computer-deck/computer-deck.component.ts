@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { Observable } from 'rxjs';
-import * as fromSnap from '../../reducers/snap.selectors';
+import { fromSnap } from 'src/app/reducers/snap.selectors';
 
 @Component({
   selector: 'snap-computer-deck',

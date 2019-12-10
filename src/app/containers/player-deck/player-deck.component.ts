@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
-import * as fromSnap from '../../reducers/snap.selectors';
+import { fromSnap } from 'src/app/reducers/snap.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
