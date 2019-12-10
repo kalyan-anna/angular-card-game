@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
-import { Observable, interval } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
-import { tap, delay, mergeMap, take, filter, takeWhile, delayWhen } from 'rxjs/operators';
+import { tap, delay, take, filter, takeWhile, switchMap, concatMap } from 'rxjs/operators';
 import { computerTurnCard, computerCallSnap } from 'src/app/reducers/snap.actions';
 
 @Component({
@@ -31,25 +31,22 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
       tap(time => this.reactionTime = time)
     ).subscribe();
 
-    this.turn$.pipe(
+    combineLatest(this.turn$, this.match$).pipe(
+      tap(([turn, match]) => console.log('match:', match, ' turn:', turn)),
       takeWhile(() => this.alive),
-      filter(turn => turn),
-      delayWhen(() => interval(this.reactionTime)),
-      mergeMap(() => this.turn$.pipe(take(1))),
-      filter(turn => turn),
-      tap(() => {
-        this.store.dispatch(computerTurnCard());
-      })
-    ).subscribe();
-
-    this.match$.pipe(
-      takeWhile(() => this.alive),
-      filter(match => match),
-      delayWhen(() => interval(this.reactionTime)),
-      mergeMap(() => this.match$.pipe(take(1))),
-      filter(match => match),
-      tap(() => {
-        this.store.dispatch(computerCallSnap());
+      filter(([turn, match]) => turn || match),
+      concatMap(value => of(value).pipe(delay(this.reactionTime))),
+      switchMap(() => combineLatest(this.turn$, this.match$).pipe(take(1))),
+      filter(([turn, match]) => turn || match),
+      tap(([turn, match]) => console.log('match2:', match, ' turn2:', turn)),
+      tap(([turn, match]) => {
+        if (match) {
+          this.store.dispatch(computerCallSnap());
+          return;
+        }
+        if (turn) {
+          this.store.dispatch(computerTurnCard());
+        }
       })
     ).subscribe();
   }

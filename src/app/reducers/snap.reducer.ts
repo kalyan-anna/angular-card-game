@@ -159,6 +159,10 @@ const _snapReducer = createReducer(initialState,
         cards: playerCards,
         turn: true
       },
+      computer: {
+        ...state.computer,
+        turn: false
+      },
       centerPile: {
         ...state.centerPile,
         cards: [],
@@ -185,6 +189,10 @@ const _snapReducer = createReducer(initialState,
         ...state.computer,
         cards: computerCards,
         turn: true
+      },
+      player: {
+        ...state.player,
+        turn: false
       },
       centerPile: {
         ...state.centerPile,
