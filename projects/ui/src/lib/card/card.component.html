@@ -4,6 +4,9 @@
     class="card__faceup"
     fxLayout="row"
     fxLayoutAlign="space-between start"
+    [ngClass]="{
+      card__faceup__red: card.shape === 'd' || card.shape === 'h'
+    }"
     *ngIf="isFaceup"
   >
     <div fxLayout="column" fxLayoutAlign="space-between start">
@@ -23,6 +26,7 @@
     </div>
   </div>
 
+  <!-- facedown -->
   <div *ngIf="!isFaceup" class="card__facedown"></div>
 </div>
 
