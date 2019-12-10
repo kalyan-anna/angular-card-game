@@ -1,14 +1,3 @@
-<style>
-  .card-pile-container {
-    display: inline-block;
-    position: relative;
-    background-color: #a9a9a9;
-    min-width: 100px;
-    min-height: 150px;
-    box-shadow: inset 0 0 10px #000000;
-  }
-</style>
-
 <div class="card-pile-container">
   <ui-card
     *ngFor="let card of cards; trackBy: identify; let i = index"
