@@ -83,7 +83,7 @@ const _snapReducer = createReducer(initialState,
       },
       computer: {
         ...state.computer,
-        turn: state.computer.cards.length > 0
+        turn: state.computer.cards.length > 0 && playerCards.length > 0
       },
       centerPile: {
         ...state.centerPile,
@@ -104,7 +104,7 @@ const _snapReducer = createReducer(initialState,
       ...state,
       player: {
         ...state.player,
-        turn: state.player.cards.length > 0
+        turn: state.player.cards.length > 0 && computerCards.length > 0
       },
       computer: {
         cards: [...computerCards],
@@ -123,7 +123,7 @@ function shuffleAndDeal(cards: Card[]) {
   const computerPile = [];
 
   // tslint:disable-next-line:prefer-for-of
-  for (let i = cards.length - 1; i > 0; i--) {
+  for (let i = cards.length - 1; i >= 0; i--) {
     const card = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
     if (i % 2 === 0) {
       playerPile.push(card);
