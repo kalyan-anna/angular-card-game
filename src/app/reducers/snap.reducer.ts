@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { startGame, resetGame, playerTurnCard, computerTurnCard } from './snap.actions';
+import { startGame, resetGame, playerTurnCard, computerTurnCard, playerCallSnap, computerCallSnap } from './snap.actions';
 import { allCards } from '../models/all-cards';
 
 export interface SnapState {
@@ -78,7 +78,7 @@ const _snapReducer = createReducer(initialState,
     const newState = {
       ...state,
       player: {
-        cards: [...playerCards],
+        cards: playerCards,
         turn: false
       },
       computer: {
@@ -87,7 +87,8 @@ const _snapReducer = createReducer(initialState,
       },
       centerPile: {
         ...state.centerPile,
-        cards: [...centerCards]
+        cards: centerCards,
+        matching: isMatching(centerCards)
       }
     };
 
@@ -113,12 +114,13 @@ const _snapReducer = createReducer(initialState,
         turn: state.player.cards.length > 0 && computerCards.length > 0
       },
       computer: {
-        cards: [...computerCards],
+        cards: computerCards,
         turn: false
       },
       centerPile: {
         ...state.centerPile,
-        cards: [...centerCards]
+        cards: centerCards,
+        matching: isMatching(centerCards)
       }
     } as SnapState;
 
@@ -128,6 +130,56 @@ const _snapReducer = createReducer(initialState,
       isPlaying: !findWinner(newState)
     };
   }),
+
+  on(playerCallSnap, state => {
+    if (!state.centerPile.matching) {
+      return state;
+    }
+    const playerCards = [...state.centerPile.cards, ...state.player.cards]
+      .map((card: Card) => {
+        return {
+          ...card,
+          status: 'facedown'
+        };
+      });
+
+    return {
+      ...state,
+      player: {
+        cards: playerCards,
+        turn: true
+      },
+      centerPile: {
+        cards: [],
+        matching: false
+      }
+    } as SnapState;
+  }),
+
+  on(computerCallSnap, state => {
+    if (!state.centerPile.matching) {
+      return state;
+    }
+    const computerCards = [...state.centerPile.cards, ...state.computer.cards]
+      .map((card: Card) => {
+        return {
+          ...card,
+          status: 'facedown'
+        };
+      });
+
+    return {
+      ...state,
+      computer: {
+        cards: computerCards,
+        turn: true
+      },
+      centerPile: {
+        cards: [],
+        matching: false
+      }
+    } as SnapState;
+  })
 );
 
 function shuffleAndDeal(cards: Card[]) {
@@ -162,6 +214,19 @@ function findWinner(state: SnapState) {
   } else {
     return null;
   }
+}
+
+function isMatching(cards: Card[]) {
+  if (cards.length < 2) {
+    return false;
+  }
+  const topCard: Card = cards[cards.length - 1];
+  const previousCard: Card = cards[cards.length - 2];
+  if (topCard.number === previousCard.number || topCard.shape === previousCard.shape) {
+    return true;
+  }
+
+  return false;
 }
 
 export function snapReducer(state, action) {

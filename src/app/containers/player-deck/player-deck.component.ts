@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
-import { Observable, fromEvent, merge } from 'rxjs';
+import { Observable, fromEvent } from 'rxjs';
 import { mergeMap, tap, takeWhile, take, filter } from 'rxjs/operators';
 import { playerTurnCard } from 'src/app/reducers/snap.actions';
 
@@ -16,7 +16,8 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
   turn$: Observable<boolean>;
   alive = true;
 
-  @ViewChild('cardPile', { static: true, read: ElementRef }) cardPileEl: ElementRef<HTMLElement>;
+  @ViewChild('cardPile', { static: true, read: ElementRef })
+  cardPileEl: ElementRef<HTMLElement>;
 
   constructor(private store: Store<SnapState>) { }
 
@@ -24,7 +25,7 @@ export class PlayerDeckComponent implements OnInit, OnDestroy {
     this.cards$ = this.store.pipe(select(fromSnap.selectPlayerPile));
     this.turn$ = this.store.pipe(select(fromSnap.selectPlayerTurn));
 
-    merge(fromEvent(this.cardPileEl.nativeElement, 'click'))
+    fromEvent(this.cardPileEl.nativeElement, 'click')
       .pipe(
         takeWhile(() => this.alive),
         mergeMap(() => this.turn$.pipe(take(1))),

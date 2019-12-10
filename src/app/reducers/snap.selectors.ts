@@ -33,11 +33,17 @@ const selectComputerTurn = createSelector(
   (state: SnapState) => state.computer.turn && state.isPlaying
 );
 
+const selectMatch = createSelector(
+  selectSnapState,
+  (state: SnapState) => state.centerPile.matching && state.isPlaying
+);
+
 export const fromSnap = {
   selectPlayerPile,
   selectComputerPile,
   selectCenterPile,
   selectPlaying,
   selectPlayerTurn,
-  selectComputerTurn
+  selectComputerTurn,
+  selectMatch
 };
