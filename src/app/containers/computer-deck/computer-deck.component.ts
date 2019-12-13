@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { SnapState } from 'src/app/reducers/snap.reducer';
 import { Observable, combineLatest, of } from 'rxjs';
 import { fromSnap } from 'src/app/reducers/snap.selectors';
-import { tap, delay, take, filter, takeWhile, switchMap, concatMap } from 'rxjs/operators';
+import { tap, delay, take, filter, takeWhile, switchMap, mergeMap } from 'rxjs/operators';
 import { computerTurnCard, computerCallSnap } from 'src/app/reducers/snap.actions';
 
 @Component({
@@ -32,11 +32,16 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
       tap(time => this.reactionTime = time)
     ).subscribe();
 
+    this.playAndSnapCards();
+    this.displayMessage();
+  }
+
+  playAndSnapCards() {
     combineLatest(this.turn$, this.match$).pipe(
       takeWhile(() => this.alive),
       filter(([turn, match]) => turn || match),
-      concatMap(value => of(value).pipe(delay(this.reactionTime))),
-      switchMap(() => combineLatest(this.turn$, this.match$).pipe(take(1))),
+      switchMap(value => of(value).pipe(delay(this.reactionTime))),
+      mergeMap(() => combineLatest(this.turn$, this.match$).pipe(take(1))),
       filter(([turn, match]) => turn || match),
       tap(([turn, match]) => {
         if (match) {
@@ -49,7 +54,9 @@ export class ComputerDeckComponent implements OnInit, OnDestroy {
         }
       })
     ).subscribe();
+  }
 
+  displayMessage() {
     combineLatest(this.turn$, this.store.pipe(select(fromSnap.selectWinner))).pipe(
       takeWhile(() => this.alive),
       tap(([turn, winner]) => {
